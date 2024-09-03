@@ -3,6 +3,5 @@ public class Hacker {
         Business bus1 = new Business("Jason", "Carr");
         System.out.println(bus1.getFirst());
         System.out.println(bus1.getLast());
-        bus1.;
     }
 }
