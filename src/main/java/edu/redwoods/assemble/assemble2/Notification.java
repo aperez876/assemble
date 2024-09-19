@@ -7,8 +7,8 @@ import java.util.List;
 public class Notification {
     private int notificationId;
     private int customerId;
-    private String message;
-    private Date timestamp;
+    protected String message;
+    protected Date timestamp;
 
     private static List<Notification> notifications = new ArrayList<>(); //List to store notifications.
 
@@ -18,6 +18,12 @@ public class Notification {
         this.customerId = customerId;
         this.message = message;
         this.timestamp = new Date();
+    }
+
+    private static int nextId = 1;
+
+    public static int generateId() {
+        return nextId++;
     }
 
     //Method to send notfications

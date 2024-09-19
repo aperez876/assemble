@@ -11,7 +11,7 @@ public class AssembleApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AssembleApp.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 350, 650); //sample size from the internet
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
