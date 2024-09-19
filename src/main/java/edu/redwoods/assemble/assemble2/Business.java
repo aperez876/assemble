@@ -130,6 +130,12 @@ public class Business {
         setName("");
         setDescription("");
         setOpeningTimes("");
+        setMeetupId(0);
+        setMeetupTitle("");
+        setMeetupDescription("");
+        setMeetupDate("");
+        setMeetupTime("");
+        setMeetupLocation("");
         System.out.println("Profile deleted successfully!");
     }
 
@@ -145,13 +151,29 @@ public class Business {
         // Implementation here
     }
 
+    @Override
+    public String toString() {
+        return "Business{" +
+                "businessId=" + businessId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", openingTimes='" + openingTimes + '\'' +
+                ", meetupId=" + meetupId +
+                ", meetupTitle='" + meetupTitle + '\'' +
+                ", meetupDescription='" + meetupDescription + '\'' +
+                ", meetupDate='" + meetupDate + '\'' +
+                ", meetupTime='" + meetupTime + '\'' +
+                ", meetupLocation='" + meetupLocation + '\'' +
+                '}';
+    }
+
 
     //an example on how to use these methods
 
     public static void main(String[] args) {
 
 
-        Business business = new Business(1, "Coffee Shop", "A cozy place to enjoy coffee", "8 AM - 8 PM");
+        Business business = new Business();
         business.createProfile(2,
                 "Bookstore",
                 "A place to find your favorite books",
