@@ -20,5 +20,8 @@ public class BusinessTest {
         // Test deleteProfile method
         myBusiness.deleteProfile();
         System.out.println("Profile deleted: " + myBusiness);
+
+        BusinessDAO businessDAO = new BusinessDAO();
+        businessDAO.saveBusiness(myBusiness);
     }
 }
