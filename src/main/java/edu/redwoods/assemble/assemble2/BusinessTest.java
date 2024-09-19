@@ -18,8 +18,8 @@ public class BusinessTest {
         System.out.println("Meetup created: " + myBusiness);
 
         // Test deleteProfile method
-        myBusiness.deleteProfile();
-        System.out.println("Profile deleted: " + myBusiness);
+        //myBusiness.deleteProfile();
+        //System.out.println("Profile deleted: " + myBusiness);
 
         BusinessDAO businessDAO = new BusinessDAO();
         businessDAO.saveBusiness(myBusiness);

@@ -49,6 +49,9 @@ public class Business {
 
     // Method to create a meetup
     public void createMeetup(int meetupId, String title, String description, String date, String time, String location) {
+        if (!time.matches("\\d{2}:\\d{2}:\\d{2}")) {
+            throw new IllegalArgumentException("Time must be in the format HH:MM:SS");
+        }
         setMeetupId(meetupId);
         setMeetupTitle(title);
         setMeetupDescription(description);
@@ -57,6 +60,7 @@ public class Business {
         setMeetupLocation(location);
         System.out.println("Meetup created successfully!");
     }
+
 
 
     /*
@@ -167,7 +171,46 @@ public class Business {
                 '}';
     }
 
+    // Getter methods
+    public int getBusinessId() {
+        return businessId;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getOpeningTimes() {
+        return openingTimes;
+    }
+
+    public int getMeetupId() {
+        return meetupId;
+    }
+
+    public String getMeetupTitle() {
+        return meetupTitle;
+    }
+
+    public String getMeetupDescription() {
+        return meetupDescription;
+    }
+
+    public String getMeetupDate() {
+        return meetupDate;
+    }
+
+    public String getMeetupTime() {
+        return meetupTime;
+    }
+
+    public String getMeetupLocation() {
+        return meetupLocation;
+    }
     //an example on how to use these methods
 
     public static void main(String[] args) {
