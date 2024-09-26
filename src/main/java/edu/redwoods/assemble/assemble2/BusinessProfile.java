@@ -8,7 +8,6 @@ public class BusinessProfile {
     private String openingTimes;
     private String location;
     private List<String> gamesAvailable;
-    static int test;
 
 
     public void updateProfile(String name, String openingTimes, String location, List<String> gamesAvailable) {

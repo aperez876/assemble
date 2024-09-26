@@ -15,14 +15,15 @@ public class MySQLQuery {
         String password = mySQLDetails.getPassword();
 
         try (Connection conn = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT * FROM users WHERE id = ?";
+            String query = "SELECT * FROM Business WHERE businessid = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, 1); // Example ID value
 
             ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
-                System.out.println("User ID: " + rs.getInt("id"));
-                System.out.println("Username: " + rs.getString("username"));
+                System.out.println("Business ID: " + rs.getInt("id"));
+                System.out.println("Business: " + rs.getString("username"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -230,7 +230,7 @@ public class Business {
                 "Java Programming Meetup",
                 "A meetup for Java enthusiasts",
                 "2024-09-25",
-                "10:00 AM",
+                "10:00:00",
                 "Coffee Shop");
     }
 }

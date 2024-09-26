@@ -3,6 +3,7 @@ package edu.redwoods.assemble.assemble2;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BusinessDAO { //DAO stands for Data Access Operator
@@ -28,7 +29,46 @@ public class BusinessDAO { //DAO stands for Data Access Operator
             pstmt.setString(10, business.getMeetupLocation());
 
             pstmt.executeUpdate();
-            System.out.println("Business information saved successfully!");
+            System.out.println("Business SQL information saved successfully!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readBusinesses() {
+        String sql = "SELECT * FROM Business";
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                int businessId = rs.getInt("businessId");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                String openingTimes = rs.getString("openingTimes");
+                int meetupId = rs.getInt("meetupId");
+                String meetupTitle = rs.getString("meetupTitle");
+                String meetupDescription = rs.getString("meetupDescription");
+                java.sql.Date meetupDate = rs.getDate("meetupDate");
+                java.sql.Time meetupTime = rs.getTime("meetupTime");
+                String meetupLocation = rs.getString("meetupLocation");
+
+                // Print or process the data as needed
+                System.out.println("This data is retrieved from our MySQL Server!!");
+                System.out.println("Business ID: " + businessId);
+                System.out.println("Name: " + name);
+                System.out.println("Description: " + description);
+                System.out.println("Opening Times: " + openingTimes);
+                System.out.println("Meetup ID: " + meetupId);
+                System.out.println("Meetup Title: " + meetupTitle);
+                System.out.println("Meetup Description: " + meetupDescription);
+                System.out.println("Meetup Date: " + meetupDate);
+                System.out.println("Meetup Time: " + meetupTime);
+                System.out.println("Meetup Location: " + meetupLocation);
+                System.out.println("-------------------------------");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

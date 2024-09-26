@@ -14,14 +14,19 @@ public class BusinessTest {
         System.out.println("Profile edited: " + myBusiness);
 
         // Test createMeetup method
-        myBusiness.createMeetup(101, "Tech Meetup", "Discussing the latest in tech", "2024-09-25", "10:00 AM", "Tech Park");
+        myBusiness.createMeetup(101, "Tech Meetup", "Discussing the latest in tech", "2024-09-25", "10:00:00", "Tech Park");
         System.out.println("Meetup created: " + myBusiness);
 
         // Test deleteProfile method
         //myBusiness.deleteProfile();
         //System.out.println("Profile deleted: " + myBusiness);
 
+        //This will write to the MySQL Server.
         BusinessDAO businessDAO = new BusinessDAO();
-        businessDAO.saveBusiness(myBusiness);
+        //businessDAO.saveBusiness(myBusiness);
+        System.out.println("---------------------------------------------------------------------------------");
+
+        //Method to read from MySQL Server
+        businessDAO.readBusinesses();
     }
 }

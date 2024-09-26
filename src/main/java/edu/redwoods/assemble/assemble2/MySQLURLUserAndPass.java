@@ -1,9 +1,9 @@
 package edu.redwoods.assemble.assemble2;
 
 public class MySQLURLUserAndPass {
-    private String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_4524081_user"; //"connection refused"
-    private String username = "freedb_4524081_user";
-    private String password = "MP94YF&?qcbywwN";
+    public String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_4524081_user"; //"connection refused"
+    public String username = "freedb_4524081_user";
+    public String password = "MP94YF&?qcbywwN";
 
     // Constructor
     public MySQLURLUserAndPass() {
