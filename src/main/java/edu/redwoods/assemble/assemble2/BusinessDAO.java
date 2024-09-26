@@ -7,71 +7,122 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BusinessDAO { //DAO stands for Data Access Operator
-    private static final String URL = "jdbc:mysql://sql.freedb.tech:3306/freedb_4524081_user"; //Seems to be working. Somtime need to import mySQL.jar
-    private static final String USER = "freedb_4524081_user";
-    private static final String PASSWORD = "MP94YF&?qcbywwN";
+    //    private static final String URL = "jdbc:mysql://sql.freedb.tech:3306/freedb_4524081_user"; //Seems to be working. Somtime need to import mySQL.jar
+    //    private static final String USER = "freedb_4524081_user";
+    //    private static final String PASSWORD = "MP94YF&?qcbywwN";
+    private static String URL = MySQLURLUserAndPass.url;
+    private static String USER = MySQLURLUserAndPass.username;
+    private static String PASSWORD = MySQLURLUserAndPass.password;
 
     public void saveBusiness(Business business) {
-        String sql = "INSERT INTO Business (businessId, name, description, openingTimes, meetupId, meetupTitle, meetupDescription, meetupDate, meetupTime, meetupLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        //String sql = "INSERT INTO Business (businessId, name, description, openingTimes, meetupId, meetupTitle, meetupDescription, meetupDate, meetupTime, meetupLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String checkSQL = "SELECT COUNT(*) FROM Business WHERE name = ?";
+        String insertSQL = "INSERT INTO Business (businessId, name, description, openingTimes, meetupId, meetupTitle, meetupDescription, meetupDate, meetupTime, meetupLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String updateSQL = "UPDATE Business SET description = ?, openingTimes = ?, meetupId = ?, meetupTitle = ?, meetupDescription = ?, meetupDate = ?, meetupTime = ?, meetupLocation = ? WHERE businessId = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement checkStmt = conn.prepareStatement(checkSQL);
+             PreparedStatement insertStmt = conn.prepareStatement(insertSQL);
+             PreparedStatement updateStmt = conn.prepareStatement(updateSQL)) {
 
-            pstmt.setInt(1, business.getBusinessId());
-            pstmt.setString(2, business.getName());
-            pstmt.setString(3, business.getDescription());
-            pstmt.setString(4, business.getOpeningTimes());
-            pstmt.setInt(5, business.getMeetupId());
-            pstmt.setString(6, business.getMeetupTitle());
-            pstmt.setString(7, business.getMeetupDescription());
-            pstmt.setDate(8, java.sql.Date.valueOf(business.getMeetupDate()));
-            pstmt.setTime(9, java.sql.Time.valueOf(business.getMeetupTime()));
-            pstmt.setString(10, business.getMeetupLocation());
+            //We were using the BusinessId to see if the records were duplicated
+            //now we need to check the Business name instead.
+            //Business will need to create a new profile if they wish to change their name.
+            //checkStmt.setLong(1, business.getBusinessId());
 
-            pstmt.executeUpdate();
-            System.out.println("Business SQL information saved successfully!");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void readBusinesses() {
-        String sql = "SELECT * FROM Business";
-
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-
-            while (rs.next()) {
-                int businessId = rs.getInt("businessId");
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                String openingTimes = rs.getString("openingTimes");
-                int meetupId = rs.getInt("meetupId");
-                String meetupTitle = rs.getString("meetupTitle");
-                String meetupDescription = rs.getString("meetupDescription");
-                java.sql.Date meetupDate = rs.getDate("meetupDate");
-                java.sql.Time meetupTime = rs.getTime("meetupTime");
-                String meetupLocation = rs.getString("meetupLocation");
-
-                // Print or process the data as needed
-                System.out.println("This data is retrieved from our MySQL Server!!");
-                System.out.println("Business ID: " + businessId);
-                System.out.println("Name: " + name);
-                System.out.println("Description: " + description);
-                System.out.println("Opening Times: " + openingTimes);
-                System.out.println("Meetup ID: " + meetupId);
-                System.out.println("Meetup Title: " + meetupTitle);
-                System.out.println("Meetup Description: " + meetupDescription);
-                System.out.println("Meetup Date: " + meetupDate);
-                System.out.println("Meetup Time: " + meetupTime);
-                System.out.println("Meetup Location: " + meetupLocation);
-                System.out.println("-------------------------------");
+            checkStmt.setString(1, business.getName());
+            try (ResultSet rs = checkStmt.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    //If Business has the same name update info
+                    System.out.println("Updating business: " + business.getName());
+                    updateStmt.setString(1, business.getDescription());
+                    updateStmt.setString(2, business.getOpeningTimes());
+                    updateStmt.setLong(3, business.getMeetupId());
+                    updateStmt.setString(4, business.getMeetupTitle());
+                    updateStmt.setString(5, business.getMeetupDescription());
+                    updateStmt.setDate(6, business.getMeetupDate() != null ? java.sql.Date.valueOf(business.getMeetupDate()) : null);
+                    updateStmt.setTime(7, business.getMeetupTime() != null ? java.sql.Time.valueOf(business.getMeetupTime()) : null);
+                    updateStmt.setString(8, business.getMeetupLocation());
+                    updateStmt.setString(9, business.getName());
+                    updateStmt.executeUpdate();
+                    System.out.println("Business information was updated!!!!");
+                } else {
+                    //If business does not exist the create it
+                    System.out.println("Inserting new business: " + business.getName());
+                    insertStmt.setLong(1, business.getBusinessId());
+                    insertStmt.setString(2, business.getName());
+                    insertStmt.setString(3, business.getDescription());
+                    insertStmt.setString(4, business.getOpeningTimes());
+                    insertStmt.setLong(5, business.getMeetupId());
+                    insertStmt.setString(6, business.getMeetupTitle());
+                    insertStmt.setString(7, business.getMeetupDescription());
+                    insertStmt.setDate(8, business.getMeetupDate() != null ? java.sql.Date.valueOf(business.getMeetupDate()) : null);
+                    insertStmt.setTime(9, business.getMeetupTime() != null ? java.sql.Time.valueOf(business.getMeetupTime()) : null);
+                    insertStmt.setString(10, business.getMeetupLocation());
+                    insertStmt.executeUpdate();
+                    System.out.println("Business SQL information saved successfully!");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+        }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        //Method to delete a business
+        public void deleteBusiness ( long businessId){
+            String deleteSQL = "DELETE FROM Business WHERE businessId = ?";
+            try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+                 PreparedStatement deleteStmt = conn.prepareStatement(deleteSQL)) {
+
+                deleteStmt.setLong(1, businessId);
+                int rowsAffected = deleteStmt.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Business deleted!!!!");
+                } else {
+                    System.out.println("No Business found.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void readBusinesses () {
+            String sql = "SELECT * FROM Business";
+
+            try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+                 PreparedStatement pstmt = conn.prepareStatement(sql);
+                 ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    long businessId = rs.getInt("businessId");
+                    String name = rs.getString("name");
+                    String description = rs.getString("description");
+                    String openingTimes = rs.getString("openingTimes");
+                    long meetupId = rs.getInt("meetupId");
+                    String meetupTitle = rs.getString("meetupTitle");
+                    String meetupDescription = rs.getString("meetupDescription");
+                    java.sql.Date meetupDate = rs.getDate("meetupDate");
+                    java.sql.Time meetupTime = rs.getTime("meetupTime");
+                    String meetupLocation = rs.getString("meetupLocation");
+
+                    // Print or process the data as needed
+                    System.out.println("This data is retrieved from our MySQL Server!!");
+                    System.out.println("Business ID: " + businessId);
+                    System.out.println("Name: " + name);
+                    System.out.println("Description: " + description);
+                    System.out.println("Opening Times: " + openingTimes);
+                    System.out.println("Meetup ID: " + meetupId);
+                    System.out.println("Meetup Title: " + meetupTitle);
+                    System.out.println("Meetup Description: " + meetupDescription);
+                    System.out.println("Meetup Date: " + meetupDate);
+                    System.out.println("Meetup Time: " + meetupTime);
+                    System.out.println("Meetup Location: " + meetupLocation);
+                    System.out.println("-------------------------------");
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

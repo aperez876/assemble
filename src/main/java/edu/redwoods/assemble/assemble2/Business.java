@@ -1,28 +1,37 @@
 package edu.redwoods.assemble.assemble2;
 
 public class Business {
-    private int businessId;
+    private long businessId;
     private String name;
     private String description;
     private String openingTimes;
 
     // Attributes for Meetup
-    private int meetupId;
+    private long meetupId;
     private String meetupTitle;
     private String meetupDescription;
     private String meetupDate;
     private String meetupTime;
     private String meetupLocation;
 
-    public void createProfile(int businessId, String name, String description, String openingTimes) {
+    //Constructor to generate a BusinessId
+    public Business() {
+        this.businessId = IDFactory.generateID();
+    }
+
+    //Getter for businessId
+    //public long getBusinessId() {
+    //    return businessId;
+    //}
+
+    public void createProfile(String name, String description, String openingTimes) {
         // Implementation here
-        this.businessId = businessId;
         this.name = name;
         this.description = description;
         this.openingTimes = openingTimes;
     }
 
-    public void setMeetupId(int meetupId) {
+    public void setMeetupId(long meetupId) {
         this.meetupId = meetupId;
     }
 
@@ -48,11 +57,12 @@ public class Business {
 
 
     // Method to create a meetup
-    public void createMeetup(int meetupId, String title, String description, String date, String time, String location) {
+    public void createMeetup(String title, String description, String date, String time, String location) {
         if (!time.matches("\\d{2}:\\d{2}:\\d{2}")) {
             throw new IllegalArgumentException("Time must be in the format HH:MM:SS");
         }
-        setMeetupId(meetupId);
+        //setMeetupId(meetupId);
+        this.meetupId = IDFactory.generateID();
         setMeetupTitle(title);
         setMeetupDescription(description);
         setMeetupDate(date);
@@ -76,10 +86,6 @@ public class Business {
     }
     */
 
-    public void setBusinessId(int businessId) {
-        this.businessId = businessId;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -93,10 +99,7 @@ public class Business {
     }
 
 
-    public void editProfile(int businessId, String name, String description, String openingTimes) {
-        if (businessId != 0) {
-            setBusinessId(businessId);
-        }
+    public void editProfile(String name, String description, String openingTimes) {
         if (name != null && !name.isEmpty()) {
             setName(name);
         }
@@ -108,33 +111,13 @@ public class Business {
         }
         System.out.println("Profile updated successfully!");
     }
-
-    /*
-    // Method to edit a profile
-    public void editProfile(int businessId, String name, String description, String openingTimes) {
-        if (businessId != 0) {
-            setBusinessId(businessId);
-        }
-        if (name != null && !name.isEmpty()) {
-            setName(name);
-        }
-        if (description != null && !description.isEmpty()) {
-            setDescription(description);
-        }
-        if (openingTimes != null && !openingTimes.isEmpty()) {
-            setOpeningTimes(openingTimes);
-        }
-        System.out.println("Profile updated successfully!");
-    }
-    */
-
 
     public void deleteProfile() {
-        setBusinessId(0);
+        this.businessId = 0;
         setName("");
         setDescription("");
         setOpeningTimes("");
-        setMeetupId(0);
+        this.meetupId = 0;
         setMeetupTitle("");
         setMeetupDescription("");
         setMeetupDate("");
@@ -172,7 +155,7 @@ public class Business {
     }
 
     // Getter methods
-    public int getBusinessId() {
+    public long getBusinessId() {
         return businessId;
     }
 
@@ -188,7 +171,7 @@ public class Business {
         return openingTimes;
     }
 
-    public int getMeetupId() {
+    public long getMeetupId() {
         return meetupId;
     }
 
@@ -217,16 +200,16 @@ public class Business {
 
 
         Business business = new Business();
-        business.createProfile(2,
+        business.createProfile(
                 "Bookstore",
                 "A place to find your favorite books",
                 "9 AM - 9 PM");
-        business.editProfile(2,
+        business.editProfile(
                 "Updated Bookstore",
                 "A place to find your favorite books and more",
                 "9 AM - 10 PM");
         business.deleteProfile();
-        business.createMeetup(1,
+        business.createMeetup(
                 "Java Programming Meetup",
                 "A meetup for Java enthusiasts",
                 "2024-09-25",
