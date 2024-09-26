@@ -1,5 +1,4 @@
-import edu.redwoods.assemble.assemble2.MySQLConnection;
-import edu.redwoods.assemble.assemble2.MySQLURLUserAndPass;
+package edu.redwoods.assemble.assemble2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
