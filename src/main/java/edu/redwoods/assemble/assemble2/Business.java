@@ -1,5 +1,7 @@
 package edu.redwoods.assemble.assemble2;
 
+import java.util.Scanner;
+
 public class Business {
     private long businessId;
     private String name;
@@ -71,20 +73,21 @@ public class Business {
         System.out.println("Meetup created successfully!");
     }
 
-
-
-    /*
      // Method to **CREATE A PROFILE**, probably to be implemented in another class:
      // maybe BusinessProfile.java(?)
 
-    public void createProfile(int businessId, String name, String description, String openingTimes) {
-        setBusinessId(businessId);
-        setName(name);
-        setDescription(description);
-        setOpeningTimes(openingTimes);
+    public void inputBusinessDetailes(Scanner scanner) {
+
+        System.out.print("Enter business name: ");
+        this.name = scanner.nextLine();
+        System.out.print("Enter business Description: ");
+        this.description = scanner.nextLine();
+        System.out.print("Enter Hours or operation: ");
+        this.openingTimes = scanner.nextLine();
         System.out.println("Profile created successfully!");
     }
-    */
+
+
 
     public void setName(String name) {
         this.name = name;
@@ -200,7 +203,18 @@ public class Business {
 
 
         Business business = new Business();
-        business.createProfile(
+        Scanner scanner = new Scanner(System.in);
+        BusinessDAO dao = new BusinessDAO();
+
+        business.inputBusinessDetailes(scanner);
+        System.out.println("Business Id: " + business.businessId);
+        System.out.println("Business Name: " + business.getName());
+        System.out.println("Business Description: " + business.getDescription());
+        System.out.println("Opening Times: " + business.getOpeningTimes());
+
+
+        scanner.close();
+        /*business.createProfile(
                 "Bookstore",
                 "A place to find your favorite books",
                 "9 AM - 9 PM");
@@ -215,5 +229,5 @@ public class Business {
                 "2024-09-25",
                 "10:00:00",
                 "Coffee Shop");
-    }
-}
+    }*/
+}}

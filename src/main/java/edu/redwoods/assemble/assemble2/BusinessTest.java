@@ -1,12 +1,14 @@
 package edu.redwoods.assemble.assemble2;
 
 import javax.xml.transform.Source;
+import java.util.Scanner;
 
 public class BusinessTest {
     public static void main(String[] args) {
         // Create a new Business instance, and new DAO
         Business myBusiness = new Business();
         BusinessDAO businessDAO = new BusinessDAO();
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Database pre-read so we can see that is there before the database get updated");
         System.out.println("Preparing to read from the mySQL Database!");
@@ -14,11 +16,20 @@ public class BusinessTest {
         businessDAO.readBusinesses();
         System.out.println("========== END OF DATABASE ==============");
 
+        //Test Business.inputBusinessDetails
+        myBusiness.inputBusinessDetailes(scanner);
+        System.out.println("Business Id: " + myBusiness.getBusinessId());
+        System.out.println("Business Name: " + myBusiness.getName());
+        System.out.println("Business Description: " + myBusiness.getDescription());
+        System.out.println("Opening Times: " + myBusiness.getOpeningTimes());
+        System.out.println("Meetup Time: " + myBusiness.getMeetupTime());
+
+
         // Test createProfile method
-        System.out.println("Testing create profile method.");
+        //System.out.println("Testing create profile method.");
         //myBusiness.createProfile("Good Business", "The Best Business in the west!", "9 to 5");
-        myBusiness.createProfile("Tech Your Mom", "IT services and consulting", "11 AM - MIDNIGHT");
-        System.out.println("Profile created: " + myBusiness);
+        //myBusiness.createProfile("Tech Your Mom", "IT services and consulting", "11 AM - MIDNIGHT");
+        //System.out.println("Profile created: " + myBusiness);
 
         // Test editProfile method
         //System.out.println("Testing edit profile method");
