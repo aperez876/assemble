@@ -12,8 +12,11 @@ public class MySQLConnection {
         String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_4524081_user"; //"connection refused"
         String user = "freedb_4524081_user";
         String password = "MP94YF&?qcbywwN";
+        MySQLURLUserAndPass mySQLDetails = new MySQLURLUserAndPass();
 
-        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+        try (Connection conn = DriverManager.getConnection(mySQLDetails.getUrl(),
+                mySQLDetails.getUsername(),
+                mySQLDetails.getPassword())) {
             if (conn != null) {
                 System.out.println("Connected to the database!");
             }
