@@ -25,7 +25,7 @@ public class BusinessDAO { // DAO stands for Data Access Object
             try (ResultSet rs = checkStmt.executeQuery()) {
                 if (rs.next() && rs.getInt(1) > 0) {
                     // If Business has the same name, update info
-                    System.out.println("Updating business: " + business.getName());
+                    System.out.println("BusinessDAO says: Updating business: " + business.getName());
                     updateStmt.setString(1, business.getDescription());
                     updateStmt.setString(2, business.getOpeningTimes());
                     updateStmt.setLong(3, business.getMeetupId());
@@ -36,10 +36,10 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     updateStmt.setString(8, business.getMeetupLocation());
                     updateStmt.setString(9, business.getName());
                     updateStmt.executeUpdate();
-                    System.out.println("Business information was updated!!!!");
+                    System.out.println("BusinessDAO says: Business information was updated!!!!");
                 } else {
                     // If business does not exist, create it
-                    System.out.println("Inserting new business: " + business.getName());
+                    System.out.println("BusinessDAO says: Inserting new business: " + business.getName());
                     insertStmt.setLong(1, business.getBusinessId());
                     insertStmt.setString(2, business.getName());
                     insertStmt.setString(3, business.getDescription());
@@ -51,7 +51,7 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     insertStmt.setTime(9, business.getMeetupTime() != null ? java.sql.Time.valueOf(business.getMeetupTime()) : null);
                     insertStmt.setString(10, business.getMeetupLocation());
                     insertStmt.executeUpdate();
-                    System.out.println("Business SQL information saved successfully!");
+                    System.out.println("BusinessDAO says: Business SQL information saved successfully!");
                 }
             }
         } catch (SQLException e) {
@@ -69,9 +69,9 @@ public class BusinessDAO { // DAO stands for Data Access Object
                 int rowsAffected = deleteStmt.executeUpdate();
 
                 if (rowsAffected > 0) {
-                    System.out.println("Business deleted!!!!");
+                    System.out.println("BusinessDAO says: Business deleted!!!!");
                 } else {
-                    System.out.println("No Business found.");
+                    System.out.println("BusinessDAO says: No Business found.");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -98,7 +98,7 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     String meetupLocation = rs.getString("meetupLocation");
 
                     // Print or process the data as needed
-                    System.out.println("This data is retrieved from our MySQL Server!!");
+                    System.out.println("BusinessDAO says: This data is retrieved from our MySQL Server!!");
                     System.out.println("Business ID: " + businessId);
                     System.out.println("Name: " + name);
                     System.out.println("Description: " + description);

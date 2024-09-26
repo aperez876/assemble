@@ -15,10 +15,10 @@ public class BusinessTest {
         System.out.println("========== END OF DATABASE ==============");
 
         // Test createProfile method
-        //System.out.println("Testing create profile method.");
+        System.out.println("Testing create profile method.");
         //myBusiness.createProfile("Good Business", "The Best Business in the west!", "9 to 5");
-        //myBusiness.createProfile("Tech Your Mom", "IT services and consulting", "11 AM - 5 PM");
-        //System.out.println("Profile created: " + myBusiness);
+        myBusiness.createProfile("Tech Your Mom", "IT services and consulting", "11 AM - MIDNIGHT");
+        System.out.println("Profile created: " + myBusiness);
 
         // Test editProfile method
         //System.out.println("Testing edit profile method");
@@ -56,11 +56,10 @@ public class BusinessTest {
         System.out.println("Preparing to delete a business from the mySQL Database!");
         System.out.println("_________________________________________________________________________________");
         //businessDAO.deleteBusiness(myBusiness.getBusinessId());
-
-        businessDAO.deleteBusiness(1727381686);
-        businessDAO.deleteBusiness(1727379997);
-        businessDAO.deleteBusiness(1727379455);
-        businessDAO.deleteBusiness(1727378879);
+        //businessDAO.deleteBusiness(1727382894);
+        //businessDAO.deleteBusiness(1727379997);
+        //businessDAO.deleteBusiness(1727379455);
+        //businessDAO.deleteBusiness(1727378879);
 
         //Checking to see that the business got removed
         System.out.println("Preparing to reread from the mySQL Database!");
