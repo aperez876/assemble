@@ -6,34 +6,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BusinessDAO { //DAO stands for Data Access Operator
-    //    private static final String URL = "jdbc:mysql://sql.freedb.tech:3306/freedb_4524081_user"; //Seems to be working. Somtime need to import mySQL.jar
-    //    private static final String USER = "freedb_4524081_user";
-    //    private static final String PASSWORD = "MP94YF&?qcbywwN";
+public class BusinessDAO { // DAO stands for Data Access Object
     private static String URL = MySQLURLUserAndPass.url;
     private static String USER = MySQLURLUserAndPass.username;
     private static String PASSWORD = MySQLURLUserAndPass.password;
 
     public void saveBusiness(Business business) {
-        //String sql = "INSERT INTO Business (businessId, name, description, openingTimes, meetupId, meetupTitle, meetupDescription, meetupDate, meetupTime, meetupLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String checkSQL = "SELECT COUNT(*) FROM Business WHERE name = ?";
         String insertSQL = "INSERT INTO Business (businessId, name, description, openingTimes, meetupId, meetupTitle, meetupDescription, meetupDate, meetupTime, meetupLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        String updateSQL = "UPDATE Business SET description = ?, openingTimes = ?, meetupId = ?, meetupTitle = ?, meetupDescription = ?, meetupDate = ?, meetupTime = ?, meetupLocation = ? WHERE businessId = ?";
+        String updateSQL = "UPDATE Business SET description = ?, openingTimes = ?, meetupId = ?, meetupTitle = ?, meetupDescription = ?, meetupDate = ?, meetupTime = ?, meetupLocation = ? WHERE name = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement checkStmt = conn.prepareStatement(checkSQL);
              PreparedStatement insertStmt = conn.prepareStatement(insertSQL);
              PreparedStatement updateStmt = conn.prepareStatement(updateSQL)) {
 
-            //We were using the BusinessId to see if the records were duplicated
-            //now we need to check the Business name instead.
-            //Business will need to create a new profile if they wish to change their name.
-            //checkStmt.setLong(1, business.getBusinessId());
-
             checkStmt.setString(1, business.getName());
             try (ResultSet rs = checkStmt.executeQuery()) {
                 if (rs.next() && rs.getInt(1) > 0) {
-                    //If Business has the same name update info
+                    // If Business has the same name, update info
                     System.out.println("Updating business: " + business.getName());
                     updateStmt.setString(1, business.getDescription());
                     updateStmt.setString(2, business.getOpeningTimes());
@@ -47,7 +38,7 @@ public class BusinessDAO { //DAO stands for Data Access Operator
                     updateStmt.executeUpdate();
                     System.out.println("Business information was updated!!!!");
                 } else {
-                    //If business does not exist the create it
+                    // If business does not exist, create it
                     System.out.println("Inserting new business: " + business.getName());
                     insertStmt.setLong(1, business.getBusinessId());
                     insertStmt.setString(2, business.getName());
@@ -62,10 +53,11 @@ public class BusinessDAO { //DAO stands for Data Access Operator
                     insertStmt.executeUpdate();
                     System.out.println("Business SQL information saved successfully!");
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
 
         //Method to delete a business
         public void deleteBusiness ( long businessId){
@@ -125,4 +117,3 @@ public class BusinessDAO { //DAO stands for Data Access Operator
             }
         }
     }
-}
