@@ -26,7 +26,7 @@ public class BusinessTest {
         //businessDAO.saveBusiness(myBusiness);
         System.out.println("---------------------------------------------------------------------------------");
 
-        //Method to read from MySQL Server
+        //Method to read from the MySQL Server
         businessDAO.readBusinesses();
     }
 }

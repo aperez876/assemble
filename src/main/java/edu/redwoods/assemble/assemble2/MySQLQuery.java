@@ -8,11 +8,9 @@ import java.sql.SQLException;
 
 public class MySQLQuery {
     public static void main(String[] args) {
-        MySQLURLUserAndPass mySQLDetails = new MySQLURLUserAndPass();
-
-        String url = mySQLDetails.getUrl();
-        String username = mySQLDetails.getUsername();
-        String password = mySQLDetails.getPassword();
+        String url = MySQLURLUserAndPass.url;
+        String username = MySQLURLUserAndPass.username;
+        String password = MySQLURLUserAndPass.password;
 
         try (Connection conn = DriverManager.getConnection(url, username, password)) {
             String query = "SELECT * FROM Business WHERE businessid = ?";
@@ -22,8 +20,8 @@ public class MySQLQuery {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                System.out.println("Business ID: " + rs.getInt("id"));
-                System.out.println("Business: " + rs.getString("username"));
+                System.out.println("Business ID: " + rs.getInt("businessid"));
+                System.out.println("Business: " + rs.getString("Name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

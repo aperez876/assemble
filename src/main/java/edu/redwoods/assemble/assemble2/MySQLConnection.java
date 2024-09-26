@@ -7,11 +7,9 @@ import java.sql.SQLException;
 public class MySQLConnection {
     public static void main(String[] args) {
 
-        MySQLURLUserAndPass mySQLDetails = new MySQLURLUserAndPass();
-
-        try (Connection conn = DriverManager.getConnection(mySQLDetails.getUrl(),
-                mySQLDetails.getUsername(),
-                mySQLDetails.getPassword())) {
+        try (Connection conn = DriverManager.getConnection(MySQLURLUserAndPass.url,
+                MySQLURLUserAndPass.username,
+                MySQLURLUserAndPass.password)) {
             if (conn != null) {
                 System.out.println("Connected to the database!");
             }
