@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BusinessDAO { // DAO stands for Data Access Object
-    private static String URL = MySQLURLUserAndPass.url;
-    private static String USER = MySQLURLUserAndPass.username;
-    private static String PASSWORD = MySQLURLUserAndPass.password;
+    public final static String URL = MySQLURLUserAndPass.url;
+    private final static String USER = MySQLURLUserAndPass.username;
+    private final static String PASSWORD = MySQLURLUserAndPass.password;
 
     public void saveBusiness(Business business) {
         String checkSQL = "SELECT COUNT(*) FROM Business WHERE name = ?";
