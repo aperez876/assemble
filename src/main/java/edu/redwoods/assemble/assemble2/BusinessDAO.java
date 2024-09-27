@@ -31,8 +31,8 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     updateStmt.setLong(3, business.getMeetupId());
                     updateStmt.setString(4, business.getMeetupTitle());
                     updateStmt.setString(5, business.getMeetupDescription());
-                    updateStmt.setDate(6, business.getMeetupDate() != null ? java.sql.Date.valueOf(business.getMeetupDate()) : null);
-                    updateStmt.setTime(7, business.getMeetupTime() != null ? java.sql.Time.valueOf(business.getMeetupTime()) : null);
+                    updateStmt.setDate(6, business.getMeetupDate() != null ? java.sql.Date.valueOf(String.valueOf(business.getMeetupDate())) : null);
+                    updateStmt.setTime(7, business.getMeetupTime() != null ? java.sql.Time.valueOf(String.valueOf(business.getMeetupTime())) : null);
                     updateStmt.setString(8, business.getMeetupLocation());
                     updateStmt.setString(9, business.getName());
                     updateStmt.executeUpdate();
@@ -47,8 +47,8 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     insertStmt.setLong(5, business.getMeetupId());
                     insertStmt.setString(6, business.getMeetupTitle());
                     insertStmt.setString(7, business.getMeetupDescription());
-                    insertStmt.setDate(8, business.getMeetupDate() != null ? java.sql.Date.valueOf(business.getMeetupDate()) : null);
-                    insertStmt.setTime(9, business.getMeetupTime() != null ? java.sql.Time.valueOf(business.getMeetupTime()) : null);
+                    insertStmt.setDate(8, business.getMeetupDate());// != null ? java.sql.Date.valueOf(business.getMeetupDate()) : null);
+                    insertStmt.setTime(9, business.getMeetupTime());// != null ? java.sql.Time.valueOf(business.getMeetupTime()) : null);
                     insertStmt.setString(10, business.getMeetupLocation());
                     insertStmt.executeUpdate();
                     System.out.println("BusinessDAO says: Business SQL information saved successfully!");

@@ -1,6 +1,5 @@
 package edu.redwoods.assemble.assemble2;
 
-import javax.xml.transform.Source;
 import java.util.Scanner;
 
 public class BusinessTest {
@@ -12,17 +11,25 @@ public class BusinessTest {
 
         System.out.println("Database pre-read so we can see that is there before the database get updated");
         System.out.println("Preparing to read from the mySQL Database!");
-        System.out.println("_________________________________________________________________________________");
+        System.out.println("========= Start OF DATABASE =============");
         businessDAO.readBusinesses();
         System.out.println("========== END OF DATABASE ==============");
 
         //Test Business.inputBusinessDetails
-        myBusiness.inputBusinessDetailes(scanner);
-        System.out.println("Business Id: " + myBusiness.getBusinessId());
-        System.out.println("Business Name: " + myBusiness.getName());
-        System.out.println("Business Description: " + myBusiness.getDescription());
-        System.out.println("Opening Times: " + myBusiness.getOpeningTimes());
-        System.out.println("Meetup Time: " + myBusiness.getMeetupTime());
+        myBusiness.inputBusinessDetails(scanner);
+        System.out.println("Want to schedule a meetup? (Y/N)");
+        String answer = scanner.nextLine().trim().toUpperCase();
+
+        if (answer.equals("Y")) {
+            myBusiness.inputMeetupDetails(scanner);
+        } else {
+            System.out.println("Business Id: " + myBusiness.getBusinessId());
+            System.out.println("Business Name: " + myBusiness.getName());
+            System.out.println("Business Description: " + myBusiness.getDescription());
+            System.out.println("Opening Times: " + myBusiness.getOpeningTimes());
+        }
+
+        scanner.close();
 
 
         // Test createProfile method
@@ -48,7 +55,7 @@ public class BusinessTest {
         //This will write to the MySQL Server.
 
         System.out.println("Saving myBusiness to the mySQL Database!");
-        if (myBusiness.getName() != null) {
+        if (myBusiness.getName() != null && !myBusiness.getName().trim().isEmpty()) {
             businessDAO.saveBusiness(myBusiness);
             System.out.println("BUSINESS SAVED!!");
         } else {
@@ -59,7 +66,7 @@ public class BusinessTest {
 
         //Reading from the MySQL Server
         System.out.println("Preparing to read from the mySQL Database!");
-        System.out.println("_________________________________________________________________________________");
+        System.out.println("========= Start OF DATABASE =============");
         businessDAO.readBusinesses();
         System.out.println("========== END OF DATABASE ==============");
 
@@ -67,14 +74,14 @@ public class BusinessTest {
         System.out.println("Preparing to delete a business from the mySQL Database!");
         System.out.println("_________________________________________________________________________________");
         //businessDAO.deleteBusiness(myBusiness.getBusinessId());
-        //businessDAO.deleteBusiness(1727382894);
-        //businessDAO.deleteBusiness(1727379997);
-        //businessDAO.deleteBusiness(1727379455);
-        //businessDAO.deleteBusiness(1727378879);
+        //businessDAO.deleteBusiness(1724697);
+        //businessDAO.deleteBusiness(1721722);
+        //businessDAO.deleteBusiness(1721687);
+        //businessDAO.deleteBusiness(1721171);
 
         //Checking to see that the business got removed
         System.out.println("Preparing to reread from the mySQL Database!");
-        System.out.println("_________________________________________________________________________________");
+        System.out.println("========= Start OF DATABASE =============");
         businessDAO.readBusinesses();
         System.out.println("========== END OF DATABASE ==============");
 

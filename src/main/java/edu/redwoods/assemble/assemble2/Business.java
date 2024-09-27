@@ -1,5 +1,7 @@
 package edu.redwoods.assemble.assemble2;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Scanner;
 
 public class Business {
@@ -12,13 +14,15 @@ public class Business {
     private long meetupId;
     private String meetupTitle;
     private String meetupDescription;
-    private String meetupDate;
-    private String meetupTime;
+    private Date meetupDate;
+    private Time meetupTime;
     private String meetupLocation;
 
+    //Constructor to generate MeetupId
     //Constructor to generate a BusinessId
     public Business() {
         this.businessId = IDFactory.generateID();
+        this.meetupId = IDFactory.generateID();
     }
 
     //Getter for businessId
@@ -45,11 +49,11 @@ public class Business {
         this.meetupDescription = meetupDescription;
     }
 
-    public void setMeetupDate(String meetupDate) {
+    public void setMeetupDate(Date meetupDate) {
         this.meetupDate = meetupDate;
     }
 
-    public void setMeetupTime(String meetupTime) {
+    public void setMeetupTime(Time meetupTime) {
         this.meetupTime = meetupTime;
     }
 
@@ -67,8 +71,8 @@ public class Business {
         this.meetupId = IDFactory.generateID();
         setMeetupTitle(title);
         setMeetupDescription(description);
-        setMeetupDate(date);
-        setMeetupTime(time);
+        setMeetupDate(Date.valueOf(date));
+        setMeetupTime(Time.valueOf(time));
         setMeetupLocation(location);
         System.out.println("Meetup created successfully!");
     }
@@ -76,7 +80,7 @@ public class Business {
      // Method to **CREATE A PROFILE**, probably to be implemented in another class:
      // maybe BusinessProfile.java(?)
 
-    public void inputBusinessDetailes(Scanner scanner) {
+    public void inputBusinessDetails(Scanner scanner) {
 
         System.out.print("Enter business name: ");
         this.name = scanner.nextLine();
@@ -87,7 +91,23 @@ public class Business {
         System.out.println("Profile created successfully!");
     }
 
+    public void inputMeetupDetails(Scanner scanner) {
 
+        System.out.print("Enter meetup title: ");
+        this.meetupTitle = scanner.nextLine();
+        System.out.print("Enter meetup description: ");
+        this.meetupDescription = scanner.nextLine();
+        //System.out.print("Enter meetup date: ");
+        //TRYING TO USE THE DateTimeFactory
+        this.meetupDate = DateTimeFactory.promptForDate(scanner);
+        //this.meetupDate = scanner.nextLine();
+        //System.out.print("Enter meetup time (HH:MM:SS): ");
+        //USING DateTimeFactory
+        this.meetupTime = DateTimeFactory.promptForTime(scanner);
+        System.out.print("Enter meetup location: ");
+        this.meetupLocation = scanner.nextLine();
+        System.out.println("Meetup created successfully!");
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -123,8 +143,8 @@ public class Business {
         this.meetupId = 0;
         setMeetupTitle("");
         setMeetupDescription("");
-        setMeetupDate("");
-        setMeetupTime("");
+        //setMeetupDate("");
+        //setMeetupTime("");
         setMeetupLocation("");
         System.out.println("Profile deleted successfully!");
     }
@@ -186,11 +206,11 @@ public class Business {
         return meetupDescription;
     }
 
-    public String getMeetupDate() {
+    public Date getMeetupDate() {
         return meetupDate;
     }
 
-    public String getMeetupTime() {
+    public Time getMeetupTime() {
         return meetupTime;
     }
 
@@ -206,7 +226,7 @@ public class Business {
         Scanner scanner = new Scanner(System.in);
         BusinessDAO dao = new BusinessDAO();
 
-        business.inputBusinessDetailes(scanner);
+        business.inputBusinessDetails(scanner);
         System.out.println("Business Id: " + business.businessId);
         System.out.println("Business Name: " + business.getName());
         System.out.println("Business Description: " + business.getDescription());
