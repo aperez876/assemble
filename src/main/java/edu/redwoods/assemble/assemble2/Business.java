@@ -9,6 +9,7 @@ public class Business {
     private String name;
     private String description;
     private String openingTimes;
+    private String location;
 
     // Attributes for Meetup
     private long meetupId;
@@ -30,11 +31,12 @@ public class Business {
     //    return businessId;
     //}
 
-    public void createProfile(String name, String description, String openingTimes) {
+    public void createProfile(String name, String description, String openingTimes, String location) {
         // Implementation here
         this.name = name;
         this.description = description;
         this.openingTimes = openingTimes;
+        this.location = location;
     }
 
     public void setMeetupId(long meetupId) {
@@ -88,6 +90,8 @@ public class Business {
         this.description = scanner.nextLine();
         System.out.print("Enter Hours or operation: ");
         this.openingTimes = scanner.nextLine();
+        System.out.print("Enter business location: ");
+        this.location = scanner.nextLine();
         System.out.println("Profile created successfully!");
     }
 
@@ -168,6 +172,7 @@ public class Business {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", openingTimes='" + openingTimes + '\'' +
+                ", location='" + location + '\'' +
                 ", meetupId=" + meetupId +
                 ", meetupTitle='" + meetupTitle + '\'' +
                 ", meetupDescription='" + meetupDescription + '\'' +
@@ -192,6 +197,10 @@ public class Business {
 
     public String getOpeningTimes() {
         return openingTimes;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public long getMeetupId() {
@@ -231,6 +240,7 @@ public class Business {
         System.out.println("Business Name: " + business.getName());
         System.out.println("Business Description: " + business.getDescription());
         System.out.println("Opening Times: " + business.getOpeningTimes());
+        System.out.println("Location: " + business.getLocation());
 
 
         scanner.close();

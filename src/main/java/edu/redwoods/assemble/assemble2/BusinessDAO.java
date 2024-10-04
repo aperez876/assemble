@@ -90,6 +90,7 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     String name = rs.getString("name");
                     String description = rs.getString("description");
                     String openingTimes = rs.getString("openingTimes");
+                    String location = rs.getString("location");
                     long meetupId = rs.getInt("meetupId");
                     String meetupTitle = rs.getString("meetupTitle");
                     String meetupDescription = rs.getString("meetupDescription");
@@ -103,6 +104,7 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     System.out.println("Name: " + name);
                     System.out.println("Description: " + description);
                     System.out.println("Opening Times: " + openingTimes);
+                    System.out.println("Location: " + location);
                     System.out.println("Meetup ID: " + meetupId);
                     System.out.println("Meetup Title: " + meetupTitle);
                     System.out.println("Meetup Description: " + meetupDescription);

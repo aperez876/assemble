@@ -27,6 +27,7 @@ public class BusinessTest {
             System.out.println("Business Name: " + myBusiness.getName());
             System.out.println("Business Description: " + myBusiness.getDescription());
             System.out.println("Opening Times: " + myBusiness.getOpeningTimes());
+            System.out.println("Location: " +myBusiness.getLocation());
         }
 
         scanner.close();
