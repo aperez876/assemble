@@ -3,6 +3,7 @@ package edu.redwoods.assemble.assemble2;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Scanner;
+import java.util.List;
 
 public class Business {
     private long businessId;
@@ -10,6 +11,7 @@ public class Business {
     private String description;
     private String openingTimes;
     private String location;
+    private BusinessProfile profile;
 
     // Attributes for Meetup
     private long meetupId;
@@ -19,10 +21,10 @@ public class Business {
     private Time meetupTime;
     private String meetupLocation;
 
-    //Constructor to generate MeetupId
-    //Constructor to generate a BusinessId
+    //Constructor
     public Business() {
         this.businessId = IDFactory.generateID();
+        this.profile = new BusinessProfile();
         this.meetupId = IDFactory.generateID();
     }
 
@@ -31,12 +33,13 @@ public class Business {
     //    return businessId;
     //}
 
-    public void createProfile(String name, String description, String openingTimes, String location) {
+    public void createProfile(String name, String description, String openingTimes, String location, List<String> gamesAvaliable, String URL, String imageURL) {
         // Implementation here
-        this.name = name;
-        this.description = description;
-        this.openingTimes = openingTimes;
-        this.location = location;
+        //this.name = name;
+        //this.description = description;
+        //this.openingTimes = openingTimes;
+        //this.location = location;
+        profile.updateProfile(name, openingTimes, location, gamesAvaliable, URL, imageURL);
     }
 
     public void setMeetupId(long meetupId) {
@@ -155,6 +158,10 @@ public class Business {
 
     public void getProfile() {
         // Implementation here
+    }
+
+    public String getProfileDetails() {
+        return profile.getProfileDetails();  // Use the profile's method to get details
     }
 
     public void createMeetup() {
