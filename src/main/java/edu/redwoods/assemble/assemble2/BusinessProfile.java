@@ -2,7 +2,14 @@ package edu.redwoods.assemble.assemble2;
 
 import java.util.List;
 
+    /*
+    •	The BusinessProfile class is designed to represent a business with various attributes.
+    •	It includes methods to update and retrieve profile details.
+    •	The main method shows how to use the class and its methods.
+    */
+
 public class BusinessProfile {
+
     private long profileId;
     private String name;
     private String openingTimes;

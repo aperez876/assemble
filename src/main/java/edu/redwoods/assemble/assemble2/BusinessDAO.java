@@ -6,11 +6,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BusinessDAO { // DAO stands for Data Access Object
+    // DAO stands for Data Access Object
+
+//    BusinessDAO that interacts with a database
+//    to perform CRUD (Create, Read, Update, Delete) operations on Business objects
+
+    /*
+    •	saveBusiness: Checks if a business exists and updates or inserts accordingly.
+    •	deleteBusiness: Deletes a business by its ID.
+    •	readBusinesses: Retrieves and prints all business records.
+    */
+
+
+public class BusinessDAO {
+
     public final static String URL = MySQLURLUserAndPass.url;
     private final static String USER = MySQLURLUserAndPass.username;
     private final static String PASSWORD = MySQLURLUserAndPass.password;
 
+    /*
+    This method saves a Business object to the database. It first checks if
+    a business with the same name exists. If it does, it updates the existing record;
+    otherwise, it inserts a new record
+    */
     public void saveBusiness(Business business) {
         String checkSQL = "SELECT COUNT(*) FROM Business WHERE name = ?";
         String insertSQL = "INSERT INTO Business (businessId, name, description, openingTimes, meetupId, meetupTitle, meetupDescription, meetupDate, meetupTime, meetupLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

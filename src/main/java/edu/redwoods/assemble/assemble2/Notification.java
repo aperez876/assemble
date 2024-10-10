@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+    /*
+    This code can be used to manage notifications for customers. It allows creating
+    notifications, sending them, and retrieving notifications for specific customers.
+    This could be part of a larger system, such as an e-commerce platform,
+    where customers receive notifications about their orders and subscriptions
+    */
+
 public class Notification {
+
     private int notificationId;
     private int customerId;
     protected String message;

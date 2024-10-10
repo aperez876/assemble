@@ -5,6 +5,8 @@ import java.sql.Time;
 import java.util.Scanner;
 import java.util.List;
 
+
+
 public class Business {
     private long businessId;
     private String name;
@@ -21,17 +23,12 @@ public class Business {
     private Time meetupTime;
     private String meetupLocation;
 
-    //Constructor
+    //The constructor initializes a new Business object and assigns a unique businessId using IDFactory.generateID().
     public Business() {
         this.businessId = IDFactory.generateID();
         this.profile = new BusinessProfile();
         this.meetupId = IDFactory.generateID();
     }
-
-    //Getter for businessId
-    //public long getBusinessId() {
-    //    return businessId;
-    //}
 
     public void createProfile(String name, String description, String openingTimes, String location, List<String> gamesAvaliable, String URL, String imageURL) {
         // Implementation here
@@ -251,7 +248,8 @@ public class Business {
 
 
         scanner.close();
-        /*business.createProfile(
+        /*
+        business.createProfile(
                 "Bookstore",
                 "A place to find your favorite books",
                 "9 AM - 9 PM");
@@ -266,5 +264,7 @@ public class Business {
                 "2024-09-25",
                 "10:00:00",
                 "Coffee Shop");
-    }*/
-}}
+    }
+        */
+    }
+}
