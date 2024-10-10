@@ -9,11 +9,16 @@ public class BusinessTest {
         BusinessDAO businessDAO = new BusinessDAO();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Database pre-read so we can see that is there before the database get updated");
-        System.out.println("Preparing to read from the mySQL Database!");
-        System.out.println("========= Start OF DATABASE =============");
-        businessDAO.readBusinesses();
-        System.out.println("========== END OF DATABASE ==============");
+        System.out.println("Do you want to read from the database? (Y/N) ");
+        String answer1 = scanner.nextLine().trim().toUpperCase();
+        if (answer1.equals("Y")) {
+            System.out.println("Preparing to reread from the mySQL Database!");
+            System.out.println("========= Start OF DATABASE =============");
+            businessDAO.readBusinesses();
+            System.out.println("========== END OF DATABASE ==============");
+        } else {
+            System.out.println("Moving on.");
+        }
 
         //Test Business.inputBusinessDetails
         myBusiness.inputBusinessDetails(scanner);
@@ -30,7 +35,7 @@ public class BusinessTest {
             System.out.println("Location: " +myBusiness.getLocation());
         }
 
-        scanner.close();
+
 
 
         // Test createProfile method
@@ -66,14 +71,24 @@ public class BusinessTest {
         System.out.println("---------------------------------------------------------------------------------");
 
         //Reading from the MySQL Server
-        System.out.println("Preparing to read from the mySQL Database!");
-        System.out.println("========= Start OF DATABASE =============");
-        businessDAO.readBusinesses();
-        System.out.println("========== END OF DATABASE ==============");
+        System.out.println("Do you want to read from the database? (Y/N) ");
+        String answer2 = scanner.nextLine().trim().toUpperCase();
+        if (answer2.equals("Y")) {
+            System.out.println("Preparing to reread from the mySQL Database!");
+            System.out.println("========= Start OF DATABASE =============");
+            businessDAO.readBusinesses();
+            System.out.println("========== END OF DATABASE ==============");
+        } else {
+            System.out.println("Business Id: " + myBusiness.getBusinessId());
+            System.out.println("Business Name: " + myBusiness.getName());
+            System.out.println("Business Description: " + myBusiness.getDescription());
+            System.out.println("Opening Times: " + myBusiness.getOpeningTimes());
+            System.out.println("Location: " +myBusiness.getLocation());
+        }
 
         //Deleting business from MySQL Server
-        System.out.println("Preparing to delete a business from the mySQL Database!");
-        System.out.println("_________________________________________________________________________________");
+        //System.out.println("Preparing to delete a business from the mySQL Database!");
+        //System.out.println("_________________________________________________________________________________");
         //businessDAO.deleteBusiness(myBusiness.getBusinessId());
         //businessDAO.deleteBusiness(1724697);
         //businessDAO.deleteBusiness(1721722);
@@ -81,10 +96,17 @@ public class BusinessTest {
         //businessDAO.deleteBusiness(1721171);
 
         //Checking to see that the business got removed
-        System.out.println("Preparing to reread from the mySQL Database!");
-        System.out.println("========= Start OF DATABASE =============");
-        businessDAO.readBusinesses();
-        System.out.println("========== END OF DATABASE ==============");
+        System.out.println("Do you want to read from the database? (Y/N) ");
+        String answer3 = scanner.nextLine().trim().toUpperCase();
+        if (answer3.equals("Y")) {
+            System.out.println("Preparing to reread from the mySQL Database!");
+            System.out.println("========= Start OF DATABASE =============");
+            businessDAO.readBusinesses();
+            System.out.println("========== END OF DATABASE ==============");
+        } else {
+            System.out.println("DONE! ");
+        }
+        scanner.close();
 
         System.out.println("Preparing to generate IDFactory number!");
         System.out.println("_________________________________________________________________________________");
