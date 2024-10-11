@@ -1,10 +1,8 @@
 package edu.redwoods.assemble.assemble2;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BusinessDAO { // DAO stands for Data Access Object
     public final static String URL = MySQLURLUserAndPass.url;
@@ -13,8 +11,8 @@ public class BusinessDAO { // DAO stands for Data Access Object
 
     public void saveBusiness(Business business) {
         String checkSQL = "SELECT COUNT(*) FROM Business WHERE name = ?";
-        String insertSQL = "INSERT INTO Business (businessId, name, description, openingTimes, meetupId, meetupTitle, meetupDescription, meetupDate, meetupTime, meetupLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        String updateSQL = "UPDATE Business SET description = ?, openingTimes = ?, meetupId = ?, meetupTitle = ?, meetupDescription = ?, meetupDate = ?, meetupTime = ?, meetupLocation = ? WHERE name = ?";
+        String insertSQL = "INSERT INTO Business (businessId, name, description, openingTimes, meetupId, meetupTitle, meetupDescription, meetupDate, meetupTime, meetupLocation, location, URL, imageURL, gamesAvailable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String updateSQL = "UPDATE Business SET description = ?, openingTimes = ?, meetupId = ?, meetupTitle = ?, meetupDescription = ?, meetupDate = ?, meetupTime = ?, meetupLocation = ?, location = ?, URL = ?, imageURL = ?, gamesAvailable = ? WHERE name = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement checkStmt = conn.prepareStatement(checkSQL);
@@ -34,7 +32,11 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     updateStmt.setDate(6, business.getMeetupDate() != null ? java.sql.Date.valueOf(String.valueOf(business.getMeetupDate())) : null);
                     updateStmt.setTime(7, business.getMeetupTime() != null ? java.sql.Time.valueOf(String.valueOf(business.getMeetupTime())) : null);
                     updateStmt.setString(8, business.getMeetupLocation());
-                    updateStmt.setString(9, business.getName());
+                    updateStmt.setString(9, business.getLocation());
+                    updateStmt.setString(10, business.getURL());
+                    updateStmt.setString(11, business.getImageURL());
+                    updateStmt.setString(12, business.getGamesAvaliable().toString());
+                    updateStmt.setString(13, business.getName());
                     updateStmt.executeUpdate();
                     System.out.println("BusinessDAO says: Business information was updated!!!!");
                 } else {
@@ -50,6 +52,10 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     insertStmt.setDate(8, business.getMeetupDate());// != null ? java.sql.Date.valueOf(business.getMeetupDate()) : null);
                     insertStmt.setTime(9, business.getMeetupTime());// != null ? java.sql.Time.valueOf(business.getMeetupTime()) : null);
                     insertStmt.setString(10, business.getMeetupLocation());
+                    insertStmt.setString(11, business.getLocation());
+                    insertStmt.setString(12, business.getURL());
+                    insertStmt.setString(13, business.getImageURL());
+                    insertStmt.setString(14, business.getGamesAvaliable().toString());
                     insertStmt.executeUpdate();
                     System.out.println("BusinessDAO says: Business SQL information saved successfully!");
                 }
@@ -97,6 +103,10 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     java.sql.Date meetupDate = rs.getDate("meetupDate");
                     java.sql.Time meetupTime = rs.getTime("meetupTime");
                     String meetupLocation = rs.getString("meetupLocation");
+                    String URL = rs.getString("URL");
+                    String imageURL = rs.getString("imageURL");
+                    String gamesAvailable = rs.getString("gamesAvailable");
+
 
                     // Print or process the data as needed
                     System.out.println("BusinessDAO says: This data is retrieved from our MySQL Server!!");
@@ -111,6 +121,9 @@ public class BusinessDAO { // DAO stands for Data Access Object
                     System.out.println("Meetup Date: " + meetupDate);
                     System.out.println("Meetup Time: " + meetupTime);
                     System.out.println("Meetup Location: " + meetupLocation);
+                    System.out.println("URL: " + URL);
+                    System.out.println("imageURL: " + imageURL);
+                    System.out.println("Games Available: " + gamesAvailable);
                     System.out.println("-------------------------------");
                 }
 
