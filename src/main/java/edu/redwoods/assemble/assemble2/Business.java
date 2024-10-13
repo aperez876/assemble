@@ -2,6 +2,7 @@ package edu.redwoods.assemble.assemble2;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 
@@ -14,6 +15,11 @@ public class Business {
     private String openingTimes;
     private String location;
     private BusinessProfile profile;
+
+    //Attributes for BusinessProfile
+    private List<String> gamesAvaliable;
+    private String URL;
+    private String imageURL;
 
     // Attributes for Meetup
     private long meetupId;
@@ -32,10 +38,13 @@ public class Business {
 
     public void createProfile(String name, String description, String openingTimes, String location, List<String> gamesAvaliable, String URL, String imageURL) {
         // Implementation here
-        //this.name = name;
-        //this.description = description;
-        //this.openingTimes = openingTimes;
-        //this.location = location;
+        this.name = name;
+        this.description = description;
+        this.openingTimes = openingTimes;
+        this.location = location;
+        this.URL = URL;
+        this.imageURL = imageURL;
+        this.gamesAvaliable = gamesAvaliable;
         profile.updateProfile(name, openingTimes, location, gamesAvaliable, URL, imageURL);
     }
 
@@ -92,7 +101,10 @@ public class Business {
         this.openingTimes = scanner.nextLine();
         System.out.print("Enter business location: ");
         this.location = scanner.nextLine();
-        System.out.println("Profile created successfully!");
+        System.out.println("Let's change the profile information: ");
+        profile.inputProfileDetails(scanner);
+        //myProfile.inputProfileDetails(scanner);
+        System.out.println("Business created successfully!");
     }
 
     public void inputMeetupDetails(Scanner scanner) {
@@ -124,6 +136,22 @@ public class Business {
     public void setOpeningTimes(String openingTimes) {
         this.openingTimes = openingTimes;
     }
+
+   public void setGamesAvaliable(ArrayList gamesAvaliable) {
+        this.gamesAvaliable = gamesAvaliable;
+   }
+
+   public void setLocation(String location) {
+        this.location = location;
+   }
+
+   public void setURL(String URL) {
+        this.URL = URL;
+   }
+
+   public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+   }
 
 
     public void editProfile(String name, String description, String openingTimes) {
@@ -205,6 +233,18 @@ public class Business {
 
     public String getLocation() {
         return location;
+    }
+
+    public List getGamesAvaliable() {
+        return profile.getGamesAvailable();
+    }
+
+    public String getURL() {
+        return profile.getURL();
+    }
+
+    public String getImageURL() {
+        return profile.getImageURL();
     }
 
     public long getMeetupId() {

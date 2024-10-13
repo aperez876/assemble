@@ -1,11 +1,14 @@
 package edu.redwoods.assemble.assemble2;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class BusinessTest {
     public static void main(String[] args) {
         // Create a new Business instance, and new DAO
         Business myBusiness = new Business();
+        //BusinessProfile myProfile = new BusinessProfile(); //we are editing my profile in the business class
         BusinessDAO businessDAO = new BusinessDAO();
         Scanner scanner = new Scanner(System.in);
 
@@ -20,6 +23,14 @@ public class BusinessTest {
             System.out.println("Moving on.");
         }
 
+        /*//Testing BusinessProfile
+        List<String> gamesAvailable = new ArrayList<>();
+        gamesAvailable.add("Chess");
+        gamesAvailable.add("D&D");*/
+
+
+
+
         //Test Business.inputBusinessDetails
         myBusiness.inputBusinessDetails(scanner);
         System.out.println("Want to schedule a meetup? (Y/N)");
@@ -32,7 +43,8 @@ public class BusinessTest {
             System.out.println("Business Name: " + myBusiness.getName());
             System.out.println("Business Description: " + myBusiness.getDescription());
             System.out.println("Opening Times: " + myBusiness.getOpeningTimes());
-            System.out.println("Location: " +myBusiness.getLocation());
+            System.out.println("Location: " + myBusiness.getLocation());
+            System.out.println(myBusiness.getProfileDetails());
         }
 
 
@@ -84,6 +96,7 @@ public class BusinessTest {
             System.out.println("Business Description: " + myBusiness.getDescription());
             System.out.println("Opening Times: " + myBusiness.getOpeningTimes());
             System.out.println("Location: " +myBusiness.getLocation());
+            System.out.println(myBusiness.getProfileDetails());
         }
 
         //Deleting business from MySQL Server
