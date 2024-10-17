@@ -1,5 +1,9 @@
 package edu.redwoods.assemble.assemble2;
 
+    /*
+    This class can be used to manage the connection details for a MySQL database
+    */
+
 public class MySQLURLUserAndPass {
     public static String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_4524081_user";
     public static String username = "freedb_4524081_user";

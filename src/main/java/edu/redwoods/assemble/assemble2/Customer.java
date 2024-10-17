@@ -2,8 +2,14 @@ package edu.redwoods.assemble.assemble2;
 
 import java.util.List;
 
+    /*
+    This code defines a Customer class that represents a customer with an ID and a name.
+    The class includes methods for sending notifications, printing notifications,
+    and placeholders for other actions like following or unfollowing a business
+    */
 
 public class Customer {
+
     private int customerId;
     private String name;
 
