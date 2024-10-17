@@ -119,6 +119,14 @@ public class BusinessTest {
         } else {
             System.out.println("DONE! ");
         }
+        String answer4 = scanner.nextLine().trim().toUpperCase();
+        System.out.println("Want to query the Database?");
+        /*if (answer4.equals("Y")) {
+            System.out.println("Enter the business ane or id ");
+            MySQLQuery query = new MySQLQuery();
+
+        }*/
+
         scanner.close();
 
         System.out.println("Preparing to generate IDFactory number!");

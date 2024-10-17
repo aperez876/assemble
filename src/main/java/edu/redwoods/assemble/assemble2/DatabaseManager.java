@@ -8,6 +8,7 @@ import java.sql.SQLException;
     to get the single database connection across the application
     */
 
+/*
 public class DatabaseManager {
 
     private static DatabaseManager instance;
@@ -34,3 +35,4 @@ public class DatabaseManager {
         return connection;
     }
 }
+*/

@@ -53,6 +53,14 @@ public class BusinessProfile {
         this.URL = scanner.nextLine();
         System.out.println("Enter business imageURL: ");
         this.imageURL = scanner.nextLine();
+        URLManager urlManager = new URLManager();
+        urlManager.addURL(imageURL);
+
+        try {
+            urlManager.saveURLsToFile("BusinessImages.txt");
+        } catch (Exception e) {
+            System.err.println("Error saving URLs to file: " + e.getMessage());
+        }
         System.out.println("Profile created successfully!");
     }
 
