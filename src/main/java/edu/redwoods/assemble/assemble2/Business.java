@@ -17,7 +17,7 @@ public class Business {
     private BusinessProfile profile;
 
     //Attributes for BusinessProfile
-    private List<String> gamesAvaliable;
+    private List<String> gamesAvailable;
     private String URL;
     private String imageURL;
 
@@ -36,7 +36,7 @@ public class Business {
         this.meetupId = IDFactory.generateID();
     }
 
-    public void createProfile(String name, String description, String openingTimes, String location, List<String> gamesAvaliable, String URL, String imageURL) {
+    public void createProfile(String name, String description, String openingTimes, String location, List<String> gamesAvailable, String URL, String imageURL) {
         // Implementation here
         this.name = name;
         this.description = description;
@@ -44,8 +44,8 @@ public class Business {
         this.location = location;
         this.URL = URL;
         this.imageURL = imageURL;
-        this.gamesAvaliable = gamesAvaliable;
-        profile.updateProfile(name, openingTimes, location, gamesAvaliable, URL, imageURL);
+        this.gamesAvailable = gamesAvailable;
+        profile.updateProfile(name, openingTimes, location, gamesAvailable, URL, imageURL);
     }
 
     public void setMeetupId(long meetupId) {
@@ -137,8 +137,8 @@ public class Business {
         this.openingTimes = openingTimes;
     }
 
-   public void setGamesAvaliable(ArrayList gamesAvaliable) {
-        this.gamesAvaliable = gamesAvaliable;
+   public void setGamesAvailable(ArrayList gamesAvailable) {
+        this.gamesAvailable = gamesAvailable;
    }
 
    public void setLocation(String location) {
@@ -235,7 +235,7 @@ public class Business {
         return location;
     }
 
-    public List getGamesAvaliable() {
+    public List getGamesAvailable() {
         return profile.getGamesAvailable();
     }
 

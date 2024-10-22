@@ -1,0 +1,24 @@
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <!--<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/your_database_name</property>
+        <property name="hibernate.connection.username">your_database_user</property>
+        <property name="hibernate.connection.password">your_database_password</property>-->
+        <property name="hibernate.connection.url">jdbc:mysql://sql.freedb.tech:3306/freedb_4524081_user</property>
+        <property name="hibernate.connection.username">freedb_4524081_user</property>
+        <!--needed an escape character for the & in our password &amp; = & -->
+        <property name="hibernate.connection.password">MP94YF&amp;?qcbywwN</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- List your annotated classes here -->
+        <mapping class="edu.redwoods.assemble.assemble2.BusinessEntity"/>
+        <mapping class="edu.redwoods.assemble.assemble2.Location"/>
+        <mapping class="edu.redwoods.assemble.assemble2.Meetup"/>
+        <mapping class="edu.redwoods.assemble.assemble2.Users"/>
+        <mapping class="edu.redwoods.assemble.assemble2.Games"/>
+        <!-- Add mappings for other classes as needed -->
+    </session-factory>
+</hibernate-configuration>

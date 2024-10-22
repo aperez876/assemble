@@ -1,8 +1,10 @@
 package edu.redwoods.assemble.assemble2;
 
+import org.hibernate.Session;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import javax.naming.Referenceable;
 
 public class BusinessTest {
     public static void main(String[] args) {
@@ -119,18 +121,40 @@ public class BusinessTest {
         } else {
             System.out.println("DONE! ");
         }
+        /*System.out.println("Want to query the Database?");
         String answer4 = scanner.nextLine().trim().toUpperCase();
-        System.out.println("Want to query the Database?");
-        /*if (answer4.equals("Y")) {
+        if (answer4.equals("Y")) {
             System.out.println("Enter the business ane or id ");
             MySQLQuery query = new MySQLQuery();
 
         }*/
+        //TESTING NEW HIBERNATE SESSION CONNECTION
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        //List Businesses
+        List<Business> businesses = session.createQuery("From Business", Business.class).list();
+        for (Business business : businesses) {
+            System.out.println("Business ID: " + business.getBusinessId());
+            System.out.println("Name: " + business.getName());
+            System.out.println("Description: " + business.getDescription());
+            System.out.println("Opening Times: " + business.getOpeningTimes());
+            System.out.println("-------------------------------");
+        }
+
+        // Fetch Meetup entities
+        List<Meetup> meetups = session.createQuery("FROM Meetup", Meetup.class).list();
+        for (Meetup meetup : meetups) {
+            System.out.println("Meetup ID: " + meetup.getId());
+            System.out.println("Name: " + meetup.getName());
+            System.out.println("Description: " + meetup.getDescription());
+            System.out.println("Location: " + meetup.getLocation());
+            System.out.println("-------------------------------");
+        }
+
+        // Close the session
+        session.close();
+
 
         scanner.close();
-
-        System.out.println("Preparing to generate IDFactory number!");
-        System.out.println("_________________________________________________________________________________");
-        System.out.println("Test IDFactory " + IDFactory.generateID());
     }
 }

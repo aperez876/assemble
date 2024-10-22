@@ -1,10 +1,8 @@
 package edu.redwoods.assemble.assemble2;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
-    // DAO stands for Data Access Object
+// DAO stands for Data Access Object
 
 //    BusinessDAO that interacts with a database
 //    to perform CRUD (Create, Read, Update, Delete) operations on Business objects
@@ -53,7 +51,7 @@ public class BusinessDAO {
                     updateStmt.setString(9, business.getLocation());
                     updateStmt.setString(10, business.getURL());
                     updateStmt.setString(11, business.getImageURL());
-                    updateStmt.setString(12, business.getGamesAvaliable().toString());
+                    updateStmt.setString(12, business.getGamesAvailable().toString());
                     updateStmt.setString(13, business.getName());
                     updateStmt.executeUpdate();
                     System.out.println("BusinessDAO says: Business information was updated!!!!");
@@ -73,7 +71,13 @@ public class BusinessDAO {
                     insertStmt.setString(11, business.getLocation());
                     insertStmt.setString(12, business.getURL());
                     insertStmt.setString(13, business.getImageURL());
-                    insertStmt.setString(14, business.getGamesAvaliable().toString());
+                    //insertStmt.setString(14, business.getGamesAvailable().toString());
+                    if (business.getGamesAvailable() == null) {
+                        insertStmt.setString(14, "");
+                    } else {
+                        insertStmt.setString(14, business.getGamesAvailable().toString());  // Ensure not null
+                    }
+
                     insertStmt.executeUpdate();
                     System.out.println("BusinessDAO says: Business SQL information saved successfully!");
                 }
@@ -149,4 +153,26 @@ public class BusinessDAO {
                 e.printStackTrace();
             }
         }
+        //This will be the new class' used to access the Database
+/*    public void saveBusiness(Business business) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.save(business);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
     }
+
+    public List<Business> getBusinesses() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("from Business", Business.class).list();
+        }
+    }*/
+    }
+
+
