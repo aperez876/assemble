@@ -24,15 +24,6 @@ public class BusinessTest {
         } else {
             System.out.println("Moving on.");
         }
-
-        /*//Testing BusinessProfile
-        List<String> gamesAvailable = new ArrayList<>();
-        gamesAvailable.add("Chess");
-        gamesAvailable.add("D&D");*/
-
-
-
-
         //Test Business.inputBusinessDetails
         myBusiness.inputBusinessDetails(scanner);
         System.out.println("Want to schedule a meetup? (Y/N)");
@@ -121,40 +112,17 @@ public class BusinessTest {
         } else {
             System.out.println("DONE! ");
         }
-        /*System.out.println("Want to query the Database?");
+        System.out.println("Want to query the Database?");
         String answer4 = scanner.nextLine().trim().toUpperCase();
         if (answer4.equals("Y")) {
             System.out.println("Enter the business ane or id ");
             MySQLQuery query = new MySQLQuery();
 
-        }*/
-        //TESTING NEW HIBERNATE SESSION CONNECTION
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        //List Businesses
-        List<Business> businesses = session.createQuery("From Business", Business.class).list();
-        for (Business business : businesses) {
-            System.out.println("Business ID: " + business.getBusinessId());
-            System.out.println("Name: " + business.getName());
-            System.out.println("Description: " + business.getDescription());
-            System.out.println("Opening Times: " + business.getOpeningTimes());
-            System.out.println("-------------------------------");
-        }
-
-        // Fetch Meetup entities
-        List<Meetup> meetups = session.createQuery("FROM Meetup", Meetup.class).list();
-        for (Meetup meetup : meetups) {
-            System.out.println("Meetup ID: " + meetup.getId());
-            System.out.println("Name: " + meetup.getName());
-            System.out.println("Description: " + meetup.getDescription());
-            System.out.println("Location: " + meetup.getLocation());
-            System.out.println("-------------------------------");
         }
 
         // Close the session
-        session.close();
+        //session.close();
 
 
         scanner.close();
-    }
-}
+    }}
